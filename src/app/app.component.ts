@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
+//meta data or decorator
 @Component({
-  selector: 'app-root',
+  selector: 'my-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'lmsapp';
