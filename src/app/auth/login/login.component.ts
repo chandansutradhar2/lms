@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
   hide: boolean = true;
-  constructor(private afAuth: AngularFireAuth) {}
+  constructor(private afAuth: AngularFireAuth, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {}
 
@@ -20,13 +21,20 @@ export class LoginComponent implements OnInit {
 
     this.afAuth
       .signInWithEmailAndPassword(this.email.value, this.password.value)
-      .then(
-        (r) => {
-          console.log(r.user);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      .then((r) => {
+        console.log(r.user);
+        this.snackBar.open('login success!!', '', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+      })
+      .catch((err) => {
+        this.snackBar.open('invalid credentials', '', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+      });
   }
 }
