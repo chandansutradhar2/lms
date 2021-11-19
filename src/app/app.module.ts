@@ -11,6 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { CoursesComponent } from './courses/courses.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +26,13 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
     CoursesComponent,
     MyprofileComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, UikitModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    UikitModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

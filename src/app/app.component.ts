@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 //meta data or decorator
 @Component({
@@ -10,6 +11,7 @@ export class AppComponent {
   title = 'lmsapp';
   toggleState: boolean = true;
 
+  constructor(private afAuth: AngularFireAuth) {}
   clickHandler() {}
 
   toggleMenu() {

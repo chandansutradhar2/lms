@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "infrasoft-lms": {
+      "hosting": {
+        "lmsapp": [
+          "infrasoft-lms"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "infrasoft-lms"
+  }
+}

@@ -105,6 +105,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "lmsapp:build:production",
+            "firebaseProject": "infrasoft-lms",
+            "firebaseHostingSite": "infrasoft-lms"
+          }
         }
       }
     }
