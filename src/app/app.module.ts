@@ -14,6 +14,9 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { environment } from 'src/environments/environment';
     AboutusComponent,
     CoursesComponent,
     MyprofileComponent,
+    LoginComponent,
+    RegisterComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
