@@ -8,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lmsapp';
-
+  toggleState: boolean = false;
   clickHandler() {}
+
+  toggleMenu() {
+    this.toggleState ? (this.toggleState = false) : (this.toggleState = true);
+  }
 }
