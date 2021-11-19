@@ -1,5 +1,12 @@
 <mat-sidenav-container class="sidenav" mode="side" autosize>
-    <mat-sidenav #sidenav [opened]="toggleMenu" class="side">Start</mat-sidenav>
+    <mat-sidenav [opened]="toggleMenu" class="side">
+        <mat-selection-list [multiple]="false">
+            <mat-list-option *ngFor="let m of menus" [value]="m.url" (click)="navigate(m)">
+                <mat-icon mat-list-icon>{{m.icon}}</mat-icon>
+                {{m.name}}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-sidenav>
     <mat-sidenav-content style="height: 87vh;">
         Main Area
     </mat-sidenav-content>
