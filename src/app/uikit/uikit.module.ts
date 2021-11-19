@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 //meta data or decorater for modules
 @NgModule({
@@ -14,6 +16,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatButtonModule,
     MatInputModule,
     MatToolbarModule,
+    MatIconModule,
   ],
   exports: [
     CommonModule,
@@ -21,6 +24,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatButtonModule,
     MatInputModule,
     MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
   ],
 })
 export class UikitModule {}
