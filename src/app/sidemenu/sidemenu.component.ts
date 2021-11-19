@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface Menu {
   name: string;
@@ -30,7 +31,7 @@ export class SidemenuComponent implements OnInit {
     this._toggleMenu = v;
   }
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     console.log(this.toggleMenu);
@@ -38,7 +39,7 @@ export class SidemenuComponent implements OnInit {
 
   navigate(ev: Menu) {
     console.log(ev);
-    ev.url.length == 0 ? this.logout() : null;
+    ev.url.length == 0 ? this.logout() : this.router.navigate([ev.url]);
   }
 
   logout() {
