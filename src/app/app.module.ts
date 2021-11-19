@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     UikitModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

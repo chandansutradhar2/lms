@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="container">
+    <div class="login-form">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Enter Email</mat-label>
+            <input matInput [formControl]="email">
+            <mat-error *ngIf="email.hasError('required') && (email.touched || email.dirty)">Email is required
+            </mat-error>
+            <mat-error *ngIf="email.hasError('email')">Email format is incorrect</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Enter Password</mat-label>
+            <input matInput [formControl]="password">
+        </mat-form-field>
+        <button mat-raised-button color="accent" [disabled]="email.invalid || password.invalid"
+            (click)="doLogin()">LOGIN</button>
+
+        <button mat-button [routerLink]="'register'">New here? Create Account</button>
+    </div>
+    <!-- <form class="login-form">
+      
+    </form> -->
+</div>

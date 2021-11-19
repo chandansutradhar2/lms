@@ -1,1 +1,42 @@
-<p>register works!</p>
+<div class="container">
+    <form [formGroup]="frmGrp" class="login-form">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Enter First Name</mat-label>
+            <input matInput formControlName="firstName">
+            <mat-error>First Name is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Enter Last Name</mat-label>
+            <input matInput formControlName="lastName">
+            <mat-error>Last Name is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Enter Email</mat-label>
+            <input matInput formControlName="email">
+            <mat-error>Email is required
+            </mat-error>
+            <mat-error>Email format is incorrect</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Enter Password</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-error>Password is required</mat-error>
+            <mat-error>Minimum Length is incorrect</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Enter MobileNo</mat-label>
+            <input matInput formControlName="mobileNo">
+            <mat-error>Mobile No is required
+            </mat-error>
+            <mat-error>Mobile Length is incorrect</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="register()">CREATE ACCOUNT</button>
+
+        <button mat-button [routerLink]="'register'">Already have an account? Login</button>
+    </form>
+    <!-- <form class="login-form">
+      
+    </form> -->
+</div>
