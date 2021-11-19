@@ -10,6 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
+  hide: boolean = true;
   constructor(private afAuth: AngularFireAuth) {}
 
   ngOnInit(): void {}

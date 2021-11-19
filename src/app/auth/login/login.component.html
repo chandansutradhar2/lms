@@ -9,7 +9,11 @@
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Enter Password</mat-label>
-            <input matInput [formControl]="password">
+            <input [type]="hide ? 'password' : 'text'" matInput [formControl]="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
         </mat-form-field>
         <button mat-raised-button color="accent" [disabled]="email.invalid || password.invalid"
             (click)="doLogin()">LOGIN</button>
