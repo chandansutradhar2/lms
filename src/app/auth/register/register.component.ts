@@ -30,14 +30,24 @@ export class RegisterComponent implements OnInit {
     if (this.frmGrp.invalid) return;
 
     console.log(this.frmGrp.value);
-    this._snackBar.open('Account created successfully', 'ok', {
-      duration: 3000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right',
-    });
-    // this.afauth.createUserWithEmailAndPassword(
-    //   this.frmGrp.controls['email'].value,
-    //   this.frmGrp.controls['password'].value
-    // );
+    this.afauth
+      .createUserWithEmailAndPassword(
+        this.frmGrp.controls['email'].value,
+        this.frmGrp.controls['password'].value
+      )
+      .then((r) => {
+        this._snackBar.open('Account created successfully', 'ok', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
+      })
+      .catch((err) => {
+        this._snackBar.open('unable to create account', 'ok', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
+      });
   }
 }
