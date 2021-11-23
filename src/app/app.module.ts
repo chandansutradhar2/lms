@@ -19,6 +19,8 @@ import { environment } from 'src/environments/environment';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,12 @@ import { AuthModule } from './auth/auth.module';
     AboutusComponent,
     CoursesComponent,
     MyprofileComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     AuthModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     UikitModule,
     AngularFireModule.initializeApp(environment.firebase),

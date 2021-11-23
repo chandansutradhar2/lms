@@ -16,15 +16,27 @@ interface Menu {
 export class SidemenuComponent implements OnInit {
   // @Input('showHide') toggleMenu: boolean = false;
   private _toggleMenu: boolean = false;
+  private _isLoggedIn: boolean = false;
+
   menus: Menu[] = [
     { name: 'Home', url: 'home', icon: 'home' },
     { name: 'About Us', url: 'aboutus', icon: 'beenhere' },
     { name: 'Courses', url: 'courses', icon: 'book' },
     { name: 'My Profile', url: 'profile', icon: 'face' },
     { name: 'Logout', url: '', icon: 'settings_power' },
+    { name: 'Admin Dashboard', url: 'admin', icon: 'dashboard' },
   ];
   public get toggleMenu(): boolean {
     return this._toggleMenu;
+  }
+
+  @Input()
+  public set isLoggedIn(v: boolean) {
+    this._isLoggedIn = v;
+  }
+
+  public get isLoggedIn(): boolean {
+    return this._isLoggedIn;
   }
 
   @Input('showHide')

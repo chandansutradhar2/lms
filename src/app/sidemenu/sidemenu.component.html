@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav" mode="side" autosize>
-    <mat-sidenav [opened]="toggleMenu" class="side">
+    <mat-sidenav [opened]="toggleMenu" class="side" *ngIf="isLoggedIn">
         <mat-selection-list [multiple]="false">
             <mat-list-option *ngFor="let m of menus" [value]="m.url" (click)="navigate(m)">
                 <mat-icon mat-list-icon>{{m.icon}}</mat-icon>
