@@ -19,7 +19,7 @@ export class AppComponent {
         router.navigate(['home']);
       } else {
         this.isLoggedIn = false;
-        router.navigate(['auth/login']);
+        router.navigate(['auth']);
       }
     });
   }

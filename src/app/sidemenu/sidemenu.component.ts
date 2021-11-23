@@ -24,6 +24,7 @@ export class SidemenuComponent implements OnInit {
     { name: 'Courses', url: 'courses', icon: 'book' },
     { name: 'My Profile', url: 'profile', icon: 'face' },
     { name: 'Logout', url: '', icon: 'settings_power' },
+    { name: 'Certificate', url: 'certificate', icon: 'face' },
     { name: 'Admin Dashboard', url: 'admin', icon: 'dashboard' },
   ];
   public get toggleMenu(): boolean {

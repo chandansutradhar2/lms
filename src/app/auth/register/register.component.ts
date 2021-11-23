@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User, USER_ROLE } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -42,10 +43,20 @@ export class RegisterComponent implements OnInit {
       )
       .then((r) => {
         if (r.user) {
+          let data = this.frmGrp.value;
+          let user: User = {
+            dob: 0,
+            email: data.email,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            mobileNo: data.mobileNo,
+            role: USER_ROLE.student,
+            uid: r.user.uid,
+          };
           this.firestore
             .collection('users')
             .doc(r.user.uid)
-            .set(this.frmGrp.value)
+            .set(user)
             .then((res) => {
               this._snackBar.open('Account created successfully', 'ok', {
                 duration: 3000,
