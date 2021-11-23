@@ -16,10 +16,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { environment } from 'src/environments/environment';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -31,11 +30,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AboutusComponent,
     CoursesComponent,
     MyprofileComponent,
-    LoginComponent,
-    RegisterComponent,
-    ResetPasswordComponent,
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     AppRoutingModule,
     UikitModule,
