@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 //meta data or decorator
 @Component({
@@ -10,8 +11,19 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AppComponent {
   title = 'lmsapp';
   toggleState: boolean = true;
-
-  constructor(private afAuth: AngularFireAuth) {}
+  isLoggedIn: boolean = false;
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
+    afAuth.onAuthStateChanged((state) => {
+      debugger;
+      if (state) {
+        this.isLoggedIn = true;
+        router.navigate(['home']);
+      } else {
+        this.isLoggedIn = false;
+        router.navigate(['login']);
+      }
+    });
+  }
   clickHandler() {}
 
   toggleMenu() {

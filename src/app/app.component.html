@@ -1,5 +1,10 @@
 <!--use event binding to listen to event comig from child-->
-<app-header (menuButtonClicked)="toggleMenu()"></app-header>
+<div *ngIf="isLoggedIn">
+    <app-header (menuButtonClicked)="toggleMenu()"></app-header>
+    <app-sidemenu [showHide]="toggleState"></app-sidemenu>
+    <app-footer></app-footer>
+</div>
 
-<app-sidemenu [showHide]="toggleState"></app-sidemenu>
-<app-footer></app-footer>
+<div *ngIf="!isLoggedIn">
+    <router-outlet></router-outlet>
+</div>

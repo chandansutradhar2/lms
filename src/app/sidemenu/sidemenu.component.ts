@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
 interface Menu {
@@ -31,7 +32,7 @@ export class SidemenuComponent implements OnInit {
     this._toggleMenu = v;
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private afAuth: AngularFireAuth) {}
 
   ngOnInit(): void {
     console.log(this.toggleMenu);
@@ -43,6 +44,6 @@ export class SidemenuComponent implements OnInit {
   }
 
   logout() {
-    alert('logout invoked');
+    this.afAuth.signOut().then((r) => {});
   }
 }
