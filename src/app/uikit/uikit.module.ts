@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 //meta data or decorater for modules
 @NgModule({
@@ -28,6 +29,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSidenavModule,
     MatListModule,
     MatSnackBarModule,
+    MatCardModule,
   ],
 })
 export class UikitModule {}
