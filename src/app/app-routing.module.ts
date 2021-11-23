@@ -12,7 +12,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutusComponent },
-  { path: 'courses', component: CoursesComponent },
+  {
+    path: 'courses',
+    loadChildren: () =>
+      import('./courses/course.module').then((r) => r.CourseModule),
+  },
   { path: 'profile', component: MyprofileComponent },
   {
     path: 'admin',

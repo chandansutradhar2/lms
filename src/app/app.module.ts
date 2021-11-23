@@ -9,7 +9,6 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { UikitModule } from './uikit/uikit.module';
 import { HomeComponent } from './home/home.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
-import { CoursesComponent } from './courses/courses.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -30,7 +29,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SidemenuComponent,
     HomeComponent,
     AboutusComponent,
-    CoursesComponent,
     MyprofileComponent,
     PageNotFoundComponent,
   ],
