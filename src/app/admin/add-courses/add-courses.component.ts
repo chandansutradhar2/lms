@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   AbstractControl,
@@ -9,7 +10,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { DISCOUNT_TYPE } from 'src/app/models/course.model';
+import { Course, DISCOUNT_TYPE } from 'src/app/models/course.model';
 import { CheckNameValidator } from './check-name.validator';
 import { taxValidator } from './tax.validator';
 
@@ -20,9 +21,12 @@ import { taxValidator } from './tax.validator';
 })
 export class AddCoursesComponent implements OnInit {
   frmGrp: FormGroup;
-  showDiscount: boolean = false;
   imageUrl: string = '';
-  constructor(private fb: FormBuilder, private firestore: AngularFirestore) {
+  constructor(
+    private fb: FormBuilder,
+    private firestore: AngularFirestore,
+    private afAuth: AngularFireAuth
+  ) {
     this.frmGrp = fb.group(
       {
         name: [
@@ -35,20 +39,15 @@ export class AddCoursesComponent implements OnInit {
         isDiscount: ['', [Validators.required]],
         discountRate: ['', [Validators.required]],
         discountType: ['', [Validators.required]],
-        lessons: fb.array([]),
         isTax: ['', Validators.required],
         taxType: [''],
         taxRate: [''],
       },
       {
         validators: taxValidator,
-        updateOn: 'blur',
+        updateOn: 'change',
       }
     );
-
-    this.frmGrp.controls['isDiscount'].valueChanges.subscribe((r) => {
-      this.showDiscount = r;
-    });
 
     this.frmGrp.controls['discountType'].valueChanges.subscribe((value) => {
       if (value == DISCOUNT_TYPE.FIXED) {
@@ -68,7 +67,40 @@ export class AddCoursesComponent implements OnInit {
   get form() {
     return this.frmGrp.controls;
   }
-  save() {
-    console.log(this.frmGrp);
+  async save() {
+    console.log(this.frmGrp.value);
+    if (this.frmGrp.invalid) {
+      return;
+    }
+
+    let data = this.frmGrp.value;
+
+    let usr = await this.afAuth.currentUser;
+
+    let course: Course = {
+      createdBy: usr?.uid || '',
+      createdOn: Date.now(),
+      description: data.description,
+      discountRate: data.discountRate,
+      reviews: [],
+      imageUrl: this.imageUrl,
+      lessons: [],
+      name: data.name,
+      price: data.price,
+      isDiscount: data.isDiscount,
+      isTax: data.isTax,
+      discountType: data.discountType,
+    };
+
+    this.firestore
+      .collection('courses')
+      .add(course)
+      .then((ref) => {
+        alert('saved successfully');
+        console.log(ref.id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

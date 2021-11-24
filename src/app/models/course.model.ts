@@ -8,9 +8,12 @@ export interface Course {
   imageUrl: string;
   lessons: Lesson[];
   reviews: Review[];
-  isDiscount?: boolean;
-  discountRate: number;
-  discountType: DISCOUNT_TYPE;
+  isDiscount: boolean;
+  discountRate?: number;
+  discountType?: DISCOUNT_TYPE;
+  isTax: boolean;
+  taxRate?: number;
+  taxType?: DISCOUNT_TYPE;
 }
 
 export enum DISCOUNT_TYPE {
