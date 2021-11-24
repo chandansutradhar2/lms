@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Course, DISCOUNT_TYPE } from 'src/app/models/course.model';
 import { CheckNameValidator } from '../check-name.validator';
 import { taxValidator } from '../tax.validator';
@@ -14,7 +15,10 @@ import { taxValidator } from '../tax.validator';
 export class CourseInfoComponent implements OnInit {
   frmGrp: FormGroup;
   imageUrl: string = '';
+  @Output() onCourseInfoSaveEvent: EventEmitter<Course> = new EventEmitter();
+
   constructor(
+    private snackBar: MatSnackBar,
     private fb: FormBuilder,
     private firestore: AngularFirestore,
     private afAuth: AngularFireAuth
@@ -62,6 +66,15 @@ export class CourseInfoComponent implements OnInit {
   async save() {
     console.log(this.frmGrp.value);
     if (this.frmGrp.invalid) {
+      this.snackBar.open(
+        'Course Info is incomplete. please complete it before saving',
+        'ok',
+        {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        }
+      );
       return;
     }
 
@@ -84,15 +97,16 @@ export class CourseInfoComponent implements OnInit {
       discountType: data.discountType,
     };
 
-    this.firestore
-      .collection('courses')
-      .add(course)
-      .then((ref) => {
-        alert('saved successfully');
-        console.log(ref.id);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.onCourseInfoSaveEvent.emit(course);
+    // this.firestore
+    //   .collection('courses')
+    //   .add(course)
+    //   .then((ref) => {
+    //     alert('saved successfully');
+    //     console.log(ref.id);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 }

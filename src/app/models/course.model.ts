@@ -29,7 +29,6 @@ export interface Review {
 }
 
 export interface Lesson {
-  seqNo: number;
   isDone: boolean;
   description: string;
   duration: number;

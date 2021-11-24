@@ -2,10 +2,10 @@
     <mat-card>
         <mat-tab-group mat-align-tabs="center">
             <mat-tab label="Course Info">
-                <app-course-info></app-course-info>
+                <app-course-info (onCourseInfoSaveEvent)="saveCourseInfo($event)"></app-course-info>
             </mat-tab>
             <mat-tab label="Lessons">
-                <app-add-lesson></app-add-lesson>
+                <app-add-lesson (onSaveLessonEvent)="saveLessonInfo($event)"></app-add-lesson>
             </mat-tab>
             <mat-tab label="Chapters">Chapter Details</mat-tab>
         </mat-tab-group>
