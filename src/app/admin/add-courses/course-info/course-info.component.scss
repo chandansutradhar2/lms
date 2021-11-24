@@ -1,0 +1,15 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.container {
+  padding: 25px;
+  margin: 15px;
+}
+
+.im {
+  display: flex;
+  justify-content: center;
+}

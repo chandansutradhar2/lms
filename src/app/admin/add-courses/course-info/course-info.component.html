@@ -1,0 +1,57 @@
+<div class="im">
+    <img src="" alt="course cover image" style="height:200px;width:200px" />
+</div>
+<form [formGroup]="frmGrp" class="form">
+    <mat-form-field appearance="outline">
+        <mat-label>Course Name</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="frmGrp.controls['name'].hasError('required') && 
+                            (frmGrp.controls['name'].touched || !frmGrp.controls['name'].pristine)">
+            Course Name is required
+        </mat-error>
+        <mat-error *ngIf="frmGrp.controls['name'].hasError('nameExist')">Course Name already exists
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Description Name</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-error *ngIf="form.description.hasError('required') && 
+                                                    (form.description.touched || !form.description.pristine)">
+            Course Name is required
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input type="number" matInput formControlName="price">
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="isDiscount">Discount Applicable?</mat-slide-toggle>
+    <mat-form-field appearance="outline" *ngIf="frmGrp.controls['isDiscount'].value">
+        <mat-label>Discount Type</mat-label>
+        <mat-select formControlName="discountType">
+            <mat-option *ngFor="let item of ['PERCENTAGE','FIXED']" [value]="item">
+                {{item}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="form.isDiscount.value">
+        <mat-label>Discount Rate</mat-label>
+        <input matInput type="number" formControlName="discountRate">
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="isTax">Tax Applicable?</mat-slide-toggle>
+
+    <mat-form-field appearance="outline" *ngIf="frmGrp.controls['isTax'].value">
+        <mat-label>Tax Rate</mat-label>
+        <input matInput type="number" formControlName="taxRate">
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="frmGrp.controls['isTax'].value==true">
+        <mat-label>Tax Type</mat-label>
+        <mat-select formControlName="taxType">
+            <mat-option *ngFor="let item of ['PERCENTAGE','FIXED']" [value]="item">
+                {{item}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+<button mat-raised-button (click)="save()">SAVE</button>
