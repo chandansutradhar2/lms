@@ -65,6 +65,9 @@ export class AddCoursesComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  get form() {
+    return this.frmGrp.controls;
+  }
   save() {
     console.log(this.frmGrp);
   }

@@ -9,10 +9,20 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Course Name</mat-label>
                         <input matInput formControlName="name">
+                        <mat-error *ngIf="frmGrp.controls['name'].hasError('required') && 
+                            (frmGrp.controls['name'].touched || !frmGrp.controls['name'].pristine)">
+                            Course Name is required
+                        </mat-error>
+                        <mat-error *ngIf="frmGrp.controls['name'].hasError('nameExist')">Course Name already exists
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Description Name</mat-label>
                         <textarea matInput formControlName="description"></textarea>
+                        <mat-error *ngIf="form.description.hasError('required') && 
+                                                    (form.description.touched || !form.description.pristine)">
+                            Course Name is required
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Price</mat-label>

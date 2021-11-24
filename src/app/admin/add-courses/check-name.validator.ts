@@ -5,8 +5,6 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-
 @Injectable({ providedIn: 'root' })
 export class CheckNameValidator implements AsyncValidator {
   constructor(private firestore: AngularFirestore) {}
