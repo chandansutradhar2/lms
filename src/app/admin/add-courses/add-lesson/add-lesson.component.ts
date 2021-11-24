@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-lesson',
@@ -14,5 +14,27 @@ export class AddLessonComponent implements OnInit {
     });
   }
 
+  get lessons() {
+    return this.frmGrp.controls['lessons'] as FormArray;
+  }
+
+  addLesson() {
+    const frmObj = this.fb.group({
+      description: '',
+      duration: 2,
+      isVisible: [true, []],
+    });
+
+    this.lessons.push(frmObj);
+  }
+
+  removeLesson(idx: number) {
+    this.lessons.removeAt(idx);
+  }
+
   ngOnInit(): void {}
+
+  save() {
+    console.log(this.frmGrp);
+  }
 }
