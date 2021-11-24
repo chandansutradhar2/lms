@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DISCOUNT_TYPE } from 'src/app/models/course.model';
+import { CheckNameValidator } from './check-name.validator';
 import { taxValidator } from './tax.validator';
 
 @Component({
@@ -20,10 +22,14 @@ export class AddCoursesComponent implements OnInit {
   frmGrp: FormGroup;
   showDiscount: boolean = false;
   imageUrl: string = '';
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private firestore: AngularFirestore) {
     this.frmGrp = fb.group(
       {
-        name: ['', [Validators.required]],
+        name: [
+          '',
+          [Validators.required],
+          new CheckNameValidator(this.firestore).validate.bind(this),
+        ],
         description: ['', [Validators.required]],
         price: ['', [Validators.required]],
         isDiscount: ['', [Validators.required]],
@@ -36,6 +42,7 @@ export class AddCoursesComponent implements OnInit {
       },
       {
         validators: taxValidator,
+        updateOn: 'blur',
       }
     );
 
