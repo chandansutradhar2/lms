@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -9,8 +8,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 
-//meta data or decorater for modules
 @NgModule({
   declarations: [],
   imports: [
@@ -30,6 +31,9 @@ import { MatCardModule } from '@angular/material/card';
     MatListModule,
     MatSnackBarModule,
     MatCardModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatTabsModule,
   ],
 })
 export class UikitModule {}

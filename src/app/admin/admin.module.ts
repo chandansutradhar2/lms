@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AddCoursesComponent } from './add-courses/add-courses.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AddLessonComponent } from './add-courses/add-lesson/add-lesson.component';
+import { AddChapterComponent } from './add-courses/add-chapter/add-chapter.component';
 
 const routes: Routes = [
   { path: '', component: AdminDashboardComponent },
@@ -15,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AdminDashboardComponent, AddCoursesComponent],
+  declarations: [AdminDashboardComponent, AddCoursesComponent, AddLessonComponent, AddChapterComponent],
   imports: [
     CommonModule,
     UikitModule,
