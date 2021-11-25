@@ -10,7 +10,9 @@ import {
   DISCOUNT_TYPE,
   Lesson,
 } from 'src/app/models/course.model';
+import { DbService } from 'src/app/services/db.service';
 import { StateService } from 'src/app/services/state.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-add-courses',
@@ -19,13 +21,13 @@ import { StateService } from 'src/app/services/state.service';
 })
 export class AddCoursesComponent implements OnInit {
   course!: Course | null;
-  lessons!: Lesson[] | null;
+
   chapters!: Chapter[] | null;
   constructor(
     private snackBar: MatSnackBar,
-    private afAuth: AngularFirestore,
-    private firestore: AngularFirestore,
-    private stateSvc: StateService
+    private dbSvc: DbService,
+    private stateSvc: StateService,
+    private utilSvc: UtilService
   ) {}
   ngOnInit(): void {
     console.log('ngIninit of Add Course Component');
@@ -34,42 +36,34 @@ export class AddCoursesComponent implements OnInit {
   saveCourseInfo(course: Course) {
     console.log('recieved from course-info', course);
     this.course = course;
-    if (this.lessons) {
-      this.course.lessons = this.lessons;
+    this.course.name = 'New Name';
+    console.log(this.course);
+    debugger;
+
+    if (this.stateSvc.lessons.length > 0) {
+      this.course.lessons = this.stateSvc.lessons;
       this.saveToDB();
       //code to save to database;
     } else {
       //lesson is not recieved,
-      this.snackBar.open('You need to save Lessons as well', 'OK', {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-      });
+      this.utilSvc.showSnackBar('You need to save Lessons as well');
     }
   }
 
   saveToDB() {
-    this.firestore
-      .collection('courses')
-      .add(this.course)
-      .then((r) => {
-        this.snackBar.open('Course Saved Succesfully', 'OK', {
-          duration: 5000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-        });
-        this.course = null;
-        this.lessons = null;
-        this.stateSvc.onCourseSaved.emit(true);
-      });
+    this.dbSvc.createDoc('courses', this.course).then((r) => {
+      this.utilSvc.showSnackBar('Course Created successfully');
+      this.course = null;
+      this.stateSvc.lessons = [];
+      this.stateSvc.onCourseSaved.emit(true);
+    });
   }
 
-  saveLessonInfo(lessons: Lesson[]) {
+  saveLessonInfo() {
     if (this.course) {
-      this.course.lessons = lessons;
+      this.course.lessons = this.stateSvc.lessons;
       this.saveToDB();
     } else {
-      this.lessons = lessons;
       this.snackBar.open(
         'You need to save Course Name and course info as well. please save it',
         'OK',

@@ -6,9 +6,9 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Lesson } from 'src/app/models/course.model';
 import { StateService } from 'src/app/services/state.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-add-lesson',
@@ -22,8 +22,8 @@ export class AddLessonComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private stateSvc: StateService
+    private stateSvc: StateService,
+    private utilSvc: UtilService
   ) {
     this.frmGrp = fb.group({
       lessons: fb.array([]),
@@ -60,19 +60,14 @@ export class AddLessonComponent implements OnInit {
 
   save() {
     if (this.frmGrp.invalid) {
-      this.snackBar.open(
+      this.utilSvc.showSnackBar(
         'Lesson information is incomplete. please complete it before saving',
-        'ok',
-        {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-        }
+        6000
       );
       return;
     }
 
-    let lessonsArr: Lesson[] = [];
+    //let lessonsArr: Lesson[] = [];
     for (let index = 0; index < this.lessons.length; index++) {
       let data = this.lessons.controls[index].value;
 
@@ -82,10 +77,9 @@ export class AddLessonComponent implements OnInit {
         duration: data.duration,
         isDone: false,
       };
-
-      lessonsArr.push(lesson);
+      this.stateSvc.lessons.push(lesson);
     }
 
-    this.onSaveLessonEvent.emit(lessonsArr);
+    this.onSaveLessonEvent.emit();
   }
 }

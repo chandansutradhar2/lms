@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Course, DISCOUNT_TYPE } from 'src/app/models/course.model';
 import { StateService } from 'src/app/services/state.service';
+import { UtilService } from 'src/app/services/util.service';
 import { CheckNameValidator } from '../check-name.validator';
 import { taxValidator } from '../tax.validator';
 
@@ -23,7 +24,8 @@ export class CourseInfoComponent implements OnInit {
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
     private firestore: AngularFirestore,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private utilSvc: UtilService
   ) {
     this.svc.onCourseSaved.subscribe((r) => {
       if (r) {
@@ -40,10 +42,10 @@ export class CourseInfoComponent implements OnInit {
         ],
         description: ['', [Validators.required]],
         price: ['', [Validators.required]],
-        isDiscount: ['', [Validators.required]],
-        discountRate: ['', [Validators.required]],
-        discountType: ['', [Validators.required]],
-        isTax: ['', Validators.required],
+        isDiscount: [false],
+        discountRate: [''],
+        discountType: [''],
+        isTax: [false],
         taxType: [''],
         taxRate: [''],
       },
@@ -74,14 +76,8 @@ export class CourseInfoComponent implements OnInit {
   async save() {
     console.log(this.frmGrp.value);
     if (this.frmGrp.invalid) {
-      this.snackBar.open(
-        'Course Info is incomplete. please complete it before saving',
-        'ok',
-        {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-        }
+      this.utilSvc.showSnackBar(
+        'Course Info is incomplete. please complete it before saving'
       );
       return;
     }
@@ -106,15 +102,6 @@ export class CourseInfoComponent implements OnInit {
     };
 
     this.onCourseInfoSaveEvent.emit(course);
-    // this.firestore
-    //   .collection('courses')
-    //   .add(course)
-    //   .then((ref) => {
-    //     alert('saved successfully');
-    //     console.log(ref.id);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    console.log(course);
   }
 }
