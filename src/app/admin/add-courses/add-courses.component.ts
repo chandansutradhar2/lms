@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialog } from '@angular/material/dialog';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { DemoComponent } from 'src/app/demo/demo.component';
 import {
   Chapter,
@@ -13,6 +15,7 @@ import {
 import { DbService } from 'src/app/services/db.service';
 import { StateService } from 'src/app/services/state.service';
 import { UtilService } from 'src/app/services/util.service';
+import { PromptDialogComponent } from 'src/app/shared/prompt-dialog/prompt-dialog.component';
 
 @Component({
   selector: 'app-add-courses',
@@ -27,8 +30,22 @@ export class AddCoursesComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dbSvc: DbService,
     private stateSvc: StateService,
-    private utilSvc: UtilService
-  ) {}
+    private utilSvc: UtilService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {
+    setTimeout(() => {
+      let dialogRef = this.dialog.open(PromptDialogComponent, {
+        data: {
+          title: 'Data Loss Prevention',
+          msg: 'You have unsaved data in course form. do you want to continue without saving them',
+        },
+      });
+      dialogRef.afterClosed().subscribe((r) => {
+        r ? this.router.navigate(['courses']) : null;
+      });
+    }, 4000);
+  }
   ngOnInit(): void {
     console.log('ngIninit of Add Course Component');
   }
@@ -38,7 +55,6 @@ export class AddCoursesComponent implements OnInit {
     this.course = course;
     this.course.name = 'New Name';
     console.log(this.course);
-    debugger;
 
     if (this.stateSvc.lessons.length > 0) {
       this.course.lessons = this.stateSvc.lessons;

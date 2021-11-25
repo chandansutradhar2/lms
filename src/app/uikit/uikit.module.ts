@@ -12,9 +12,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SpinnerButtonComponent } from '../shared/spinner-button/spinner-button.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PromptDialogComponent } from '../shared/prompt-dialog/prompt-dialog.component';
 
 @NgModule({
-  declarations: [SpinnerButtonComponent],
+  declarations: [SpinnerButtonComponent, PromptDialogComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -35,7 +37,9 @@ import { SpinnerButtonComponent } from '../shared/spinner-button/spinner-button.
     MatSlideToggleModule,
     MatSelectModule,
     MatTabsModule,
+    MatDialogModule,
     SpinnerButtonComponent,
+    PromptDialogComponent,
   ],
 })
 export class UikitModule {}
