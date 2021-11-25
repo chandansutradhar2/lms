@@ -33,19 +33,7 @@ export class AddCoursesComponent implements OnInit {
     private utilSvc: UtilService,
     private dialog: MatDialog,
     private router: Router
-  ) {
-    setTimeout(() => {
-      let dialogRef = this.dialog.open(PromptDialogComponent, {
-        data: {
-          title: 'Data Loss Prevention',
-          msg: 'You have unsaved data in course form. do you want to continue without saving them',
-        },
-      });
-      dialogRef.afterClosed().subscribe((r) => {
-        r ? this.router.navigate(['courses']) : null;
-      });
-    }, 4000);
-  }
+  ) {}
   ngOnInit(): void {
     console.log('ngIninit of Add Course Component');
   }

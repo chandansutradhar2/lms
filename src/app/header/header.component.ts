@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { StateService } from '../services/state.service';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,7 @@ import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
   //step 1:
   @Output() menuButtonClicked: EventEmitter<any> = new EventEmitter();
+
   private _isLoggedIn: boolean = false;
 
   @Input()
@@ -19,12 +21,13 @@ export class HeaderComponent implements OnInit {
     return this._isLoggedIn;
   }
 
-  constructor() {}
+  constructor(private stateSvc: StateService) {}
 
   ngOnInit(): void {}
 
   menuIconClicked() {
     //step 2: emit the event
     this.menuButtonClicked.emit();
+    this.stateSvc.menuButtonClicked.emit();
   }
 }

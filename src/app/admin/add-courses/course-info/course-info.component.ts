@@ -2,10 +2,13 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Course, DISCOUNT_TYPE } from 'src/app/models/course.model';
 import { StateService } from 'src/app/services/state.service';
 import { UtilService } from 'src/app/services/util.service';
+import { PromptDialogComponent } from 'src/app/shared/prompt-dialog/prompt-dialog.component';
 import { CheckNameValidator } from '../check-name.validator';
 import { taxValidator } from '../tax.validator';
 
@@ -25,8 +28,25 @@ export class CourseInfoComponent implements OnInit {
     private fb: FormBuilder,
     private firestore: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private utilSvc: UtilService
+    private utilSvc: UtilService,
+    private dialog: MatDialog,
+    private router: Router
   ) {
+    this.svc.menuButtonClicked.subscribe(() => {
+      if (this.frmGrp.touched || this.frmGrp.dirty) {
+        let dialogRef = this.dialog.open(PromptDialogComponent, {
+          data: {
+            title: 'Data Loss Prevention',
+            msg: 'You have unsaved data in course form. do you want to continue without saving them',
+          },
+        });
+
+        dialogRef.afterClosed().subscribe((r) => {
+          r ? this.router.navigate(['courses']) : null;
+        });
+      }
+    });
+
     this.svc.onCourseSaved.subscribe((r) => {
       if (r) {
         this.imageUrl = '';
