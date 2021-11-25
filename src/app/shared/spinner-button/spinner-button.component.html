@@ -1,1 +1,6 @@
-<p>spinner-button works!</p>
+<button mat-raised-button color="primary" style="width:100%" (click)="click()">
+    <span style="display: flex;justify-content: center;align-items: center;">
+        <mat-icon *ngIf="showIcon" matPrefix style="position: absolute;margin-right:250px" svgIcon="spinner"></mat-icon>
+        <div>{{label}}</div>
+    </span>
+</button>

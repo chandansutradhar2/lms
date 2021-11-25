@@ -20,6 +20,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DemoComponent } from './demo/demo.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { DemoComponent } from './demo/demo.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
 
   bootstrap: [AppComponent],

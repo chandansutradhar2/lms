@@ -15,10 +15,13 @@
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
-        <button mat-raised-button color="accent" [disabled]="email.invalid || password.invalid"
-            (click)="doLogin()">LOGIN</button>
+        <!-- <button mat-raised-button color="accent" [disabled]="email.invalid || password.invalid"
+            (click)="doLogin()">LOGIN</button> -->
+        <infra-spinner-button [label]="'LOGIN'" [showIcon]="showIcon" (buttonClicked)="doLogin()">
+        </infra-spinner-button>
 
         <button mat-button routerLink="../register">New here? Create Account</button>
+
     </div>
 
 </div>

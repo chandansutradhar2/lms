@@ -18,7 +18,7 @@ export class CourseInfoComponent implements OnInit {
   frmGrp: FormGroup;
   imageUrl: string = '';
   @Output() onCourseInfoSaveEvent: EventEmitter<Course> = new EventEmitter();
-
+  showIcon: boolean = false;
   constructor(
     private svc: StateService,
     private snackBar: MatSnackBar,
@@ -81,7 +81,7 @@ export class CourseInfoComponent implements OnInit {
       );
       return;
     }
-
+    this.showIcon = true;
     let data = this.frmGrp.value;
 
     let usr = await this.afAuth.currentUser;
@@ -102,6 +102,10 @@ export class CourseInfoComponent implements OnInit {
     };
 
     this.onCourseInfoSaveEvent.emit(course);
+    setTimeout(() => {
+      this.showIcon = false;
+    }, 4000);
+
     console.log(course);
   }
 }
