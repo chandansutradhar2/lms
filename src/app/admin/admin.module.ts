@@ -9,6 +9,8 @@ import { AddLessonComponent } from './add-courses/add-lesson/add-lesson.componen
 import { AddChapterComponent } from './add-courses/add-chapter/add-chapter.component';
 import { CourseInfoComponent } from './add-courses/course-info/course-info.component';
 import { ListUserComponent } from './admin-dashboard/list-user/list-user.component';
+import { ButtonComponent } from './admin-dashboard/button/button.component';
+import { BodyComponent } from './admin-dashboard/body/body.component';
 
 const routes: Routes = [
   { path: '', component: AdminDashboardComponent },
@@ -19,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AdminDashboardComponent, AddCoursesComponent, AddLessonComponent, AddChapterComponent, CourseInfoComponent, ListUserComponent],
+  declarations: [AdminDashboardComponent, AddCoursesComponent, AddLessonComponent, AddChapterComponent, CourseInfoComponent, ListUserComponent, ButtonComponent, BodyComponent],
   imports: [
     CommonModule,
     UikitModule,
