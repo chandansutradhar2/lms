@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Lesson } from 'src/app/models/course.model';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-add-lesson',
@@ -16,11 +17,24 @@ import { Lesson } from 'src/app/models/course.model';
 })
 export class AddLessonComponent implements OnInit {
   frmGrp: FormGroup;
+
   @Output() onSaveLessonEvent: EventEmitter<Lesson[]> = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
+  constructor(
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private stateSvc: StateService
+  ) {
     this.frmGrp = fb.group({
       lessons: fb.array([]),
+    });
+
+    //code to get notified when the course is saved
+    this.stateSvc.onCourseSaved.subscribe((r) => {
+      if (r) {
+        this.frmGrp.reset();
+        this.lessons.clear();
+      }
     });
   }
 
@@ -58,9 +72,10 @@ export class AddLessonComponent implements OnInit {
       return;
     }
 
-    let lessons: Lesson[] = [];
+    let lessonsArr: Lesson[] = [];
     for (let index = 0; index < this.lessons.length; index++) {
       let data = this.lessons.controls[index].value;
+
       let lesson: Lesson = {
         chapters: [],
         description: data.description,
@@ -68,9 +83,9 @@ export class AddLessonComponent implements OnInit {
         isDone: false,
       };
 
-      lessons.push(lesson);
+      lessonsArr.push(lesson);
     }
 
-    this.onSaveLessonEvent.emit(lessons);
+    this.onSaveLessonEvent.emit(lessonsArr);
   }
 }

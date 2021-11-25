@@ -3,12 +3,14 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DemoComponent } from 'src/app/demo/demo.component';
 import {
   Chapter,
   Course,
   DISCOUNT_TYPE,
   Lesson,
 } from 'src/app/models/course.model';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-add-courses',
@@ -22,7 +24,8 @@ export class AddCoursesComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private afAuth: AngularFirestore,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private stateSvc: StateService
   ) {}
   ngOnInit(): void {
     console.log('ngIninit of Add Course Component');
@@ -57,6 +60,7 @@ export class AddCoursesComponent implements OnInit {
         });
         this.course = null;
         this.lessons = null;
+        this.stateSvc.onCourseSaved.emit(true);
       });
   }
 
@@ -65,6 +69,7 @@ export class AddCoursesComponent implements OnInit {
       this.course.lessons = lessons;
       this.saveToDB();
     } else {
+      this.lessons = lessons;
       this.snackBar.open(
         'You need to save Course Name and course info as well. please save it',
         'OK',
@@ -74,7 +79,6 @@ export class AddCoursesComponent implements OnInit {
           verticalPosition: 'top',
         }
       );
-      this.lessons = lessons;
     }
   }
 

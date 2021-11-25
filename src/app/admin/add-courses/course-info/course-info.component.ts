@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Course, DISCOUNT_TYPE } from 'src/app/models/course.model';
+import { StateService } from 'src/app/services/state.service';
 import { CheckNameValidator } from '../check-name.validator';
 import { taxValidator } from '../tax.validator';
 
@@ -18,11 +19,18 @@ export class CourseInfoComponent implements OnInit {
   @Output() onCourseInfoSaveEvent: EventEmitter<Course> = new EventEmitter();
 
   constructor(
+    private svc: StateService,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
     private firestore: AngularFirestore,
     private afAuth: AngularFireAuth
   ) {
+    this.svc.onCourseSaved.subscribe((r) => {
+      if (r) {
+        this.imageUrl = '';
+        this.frmGrp.reset();
+      }
+    });
     this.frmGrp = fb.group(
       {
         name: [
