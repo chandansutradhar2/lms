@@ -20,7 +20,6 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DemoComponent } from './demo/demo.component';
-import { StateService } from './services/state.service';
 
 @NgModule({
   declarations: [

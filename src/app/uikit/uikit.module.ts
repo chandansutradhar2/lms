@@ -11,9 +11,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { SpinnerButtonComponent } from '../shared/spinner-button/spinner-button.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [SpinnerButtonComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -34,6 +35,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSlideToggleModule,
     MatSelectModule,
     MatTabsModule,
+    SpinnerButtonComponent,
   ],
 })
 export class UikitModule {}
