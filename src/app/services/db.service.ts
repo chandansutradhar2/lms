@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DbService {
+  constructor() {}
 
-  constructor() { }
+  createDocWithId(collectionName: string, doc: any, docId: string) {}
+  createDoc(collectionName: string, doc: any) {}
+
+  deleteDoc() {}
+
+  updateDoc() {}
+
+  fetchDocById(id: string) {}
 }
